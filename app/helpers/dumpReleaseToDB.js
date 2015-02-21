@@ -1,15 +1,19 @@
 var MongoClient = require('mongodb').MongoClient
        , format = require('util').format;
-var ReleaseRetriever = new require('./releaseRetriever');
+var ReleaseRetriever = require('./releaseRetriever.js');
 
-var releaseRetriever = ReleaseRetriever();
+var releaseRetriever = new ReleaseRetriever();
 
-MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
+MongoClient.connect('mongodb://127.0.0.1:27017/pttest', function(err, db) {
   if(err) throw err;
 
   releaseRetriever.lastRelease(function(err, request, body) {
     var collection = db.collection('users');
-    releaseData = JSON.parse(body);
-    collection.insert(releaseData);
+    releaseData    = releaseRetriever.processRelease(JSON.parse(body));
+    collection.insert(releaseData, function(err, doc) {
+      if(err) { console.log(err) }
+      console.log("USERS ADDED");
+      db.close;
+    });
   });
 });

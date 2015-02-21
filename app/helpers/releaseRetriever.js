@@ -17,7 +17,6 @@ ReleaseRetriever.prototype.lastRelease = function(callback) {
 }
 
 ReleaseRetriever.prototype.processRelease = function(releaseJSON) {
-
   var players = releaseJSON.players;
   var releaseID = this.getReleaseID(releaseJSON).toString();
   var output  = {};

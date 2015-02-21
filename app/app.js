@@ -1,11 +1,16 @@
-var restify = require('restify');
+var restify          = require('restify');
+var releaseRetriever = require('./helpers/releaseRetriever')
+
+var releaseRetriever = new releaseRetriever();
 
 var server = restify.createServer({
   name: 'frontliners-api',
 });
 
-server.get('/', function create(req, res, next) {
-  res.send(201, Math.random().toString(36).substr(3, 8));
+server.get('/scoreboard', function create(req, res, next) {
+  releaseRetriever.lastRelease(function(err, req, body) {
+    res.send(body);
+  });
   return next();
 });
 

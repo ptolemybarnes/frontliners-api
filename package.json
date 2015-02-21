@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "mongodb": "^1.4.31",
     "request": "^2.53.0",
     "restify": "^2.8.5",
     "twit": "^1.1.20",

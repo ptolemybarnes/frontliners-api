@@ -1,5 +1,5 @@
 var request = require('request');
-var fs      = 
+var _       = require('underscore');
 
 ReleaseRetriever = function() {
   this.board_id = 8299;
@@ -18,6 +18,7 @@ ReleaseRetriever.prototype.lastRelease = function(callback) {
 
 ReleaseRetriever.prototype.processRelease = function(releaseJSON) {
   var players = releaseJSON.players;
+  var releaseID = this.getReleaseID(releaseJSON).toString();
   var output  = [];
   for(var i = 0; i < players.length; i ++) {
     var player = players[i];
@@ -25,10 +26,15 @@ ReleaseRetriever.prototype.processRelease = function(releaseJSON) {
       username: player.player_identifier,
       full_name: player.full_name,
       profile_picture_url: player.profile_picture_url,
-      rank: i + 1 }
+      rank: player.releases[releaseID].rank }
     output.push(playerHash);
   }
   return output;
+}
+
+ReleaseRetriever.prototype.getReleaseID = function(Json) {
+  var releaseNums =  _.keys(Json.board.releases)
+  return _.max(releaseNums);
 }
 
 module.exports = ReleaseRetriever;

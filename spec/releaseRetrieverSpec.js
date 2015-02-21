@@ -6,11 +6,11 @@ describe('ReleaseRetriever', function() {
   var rT;
 
   it('processes release JSON into form we want', function() {
-    rT = new releaseRetriever;
-    var exampleJSON = JSON.parse(fs.readFileSync('./spec/example_release.txt').toString());
+    rT                  = new releaseRetriever;
+    var exampleJSON     = JSON.parse(fs.readFileSync('./spec/example_release.txt').toString());
     var processedObject = rT.processRelease(exampleJSON) 
 
-    expect(processedObject).toEqual([
+    expect(processedObject).toEqual({ '2330718': [
       { username: 'ozoesono',
         full_name: 'Ozo',
         profile_picture_url: "https://pbs.twimg.com/profile_images/422441705833369602/gRrKy7D3_normal.png",
@@ -19,7 +19,7 @@ describe('ReleaseRetriever', function() {
         full_name: 'Ptolemy',
         profile_picture_url: 'https://pbs.twimg.com/profile_images/1743558449/jf28_normal.jpg',
         rank: '2' }
-      ]);
+      ]});
   })
  
   it('retrieves the release id from the JSON', function() {

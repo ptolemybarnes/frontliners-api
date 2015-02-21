@@ -29,4 +29,4 @@ server.get('/scoreboard', function create(req, res, next) {
   return next();
 });
 
-server.listen(port);
+server.listen(80);

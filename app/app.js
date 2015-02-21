@@ -11,12 +11,14 @@ var twit             = new twit({
 });
 
 var server = restify.createServer({
-  name: 'frontliners-api',
+  name: 'frontliners-api'
 });
 
 server.get('/scoreboard', function create(req, res, next) {
   releaseRetriever.lastRelease(function(err, req, body) {
-    res.send(body);
+    res.send(releaseRetriever.processRelease(JSON.parse(body)));
+    //  res.send(body);
+    //Produce Modified Json
   });
   return next();
 });

@@ -10,6 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "request": "^2.53.0",
-    "restify": "^2.8.5"
+    "restify": "^2.8.5",
+    "twit": "^1.1.20",
+    "twitter": "^1.2.1"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
   }
 }

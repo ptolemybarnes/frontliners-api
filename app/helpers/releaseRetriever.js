@@ -1,4 +1,5 @@
 var request = require('request');
+var fs      = 
 
 ReleaseRetriever = function() {
   this.board_id = 8299;
@@ -13,6 +14,21 @@ ReleaseRetriever.prototype.lastRelease = function(callback) {
     headers: { 'X-API-KEY': process.env.RISE_API_KEY }
   };
   request.post(options, callback).form({board_id: 8299})
+}
+
+ReleaseRetriever.prototype.processRelease = function(releaseJSON) {
+  var players = releaseJSON.players;
+  var output  = [];
+  for(var i = 0; i < players.length; i ++) {
+    var player = players[i];
+    var playerHash = {
+      username: player.player_identifier,
+      full_name: player.full_name,
+      profile_picture_url: player.profile_picture_url,
+      rank: i + 1 }
+    output.push(playerHash);
+  }
+  return output;
 }
 
 module.exports = ReleaseRetriever;

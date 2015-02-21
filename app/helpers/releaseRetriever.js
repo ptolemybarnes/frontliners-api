@@ -20,7 +20,9 @@ ReleaseRetriever.prototype.processRelease = function(releaseJSON) {
 
   var players = releaseJSON.players;
   var releaseID = this.getReleaseID(releaseJSON).toString();
-  var output  = [];
+  var output  = {};
+  output[releaseID] = []
+
   for(var i = 0; i < players.length; i ++) {
     var player = players[i];
     var playerHash = {
@@ -28,8 +30,9 @@ ReleaseRetriever.prototype.processRelease = function(releaseJSON) {
       full_name: player.full_name,
       profile_picture_url: player.profile_picture_url,
       rank: player.releases[releaseID].rank }
-    output.push(playerHash);
+    output[releaseID].push(playerHash);
   }
+
   return output;
 }
 

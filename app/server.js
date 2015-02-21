@@ -23,10 +23,8 @@ server.get('/', function create(req, res, next) {
 server.get('/scoreboard', function create(req, res, next) {
   releaseRetriever.lastRelease(function(err, req, body) {
     res.send(releaseRetriever.processRelease(JSON.parse(body)));
-    //  res.send(body);
-    //Produce Modified Json
   });
   return next();
 });
 
-server.listen(80);
+server.listen(port);

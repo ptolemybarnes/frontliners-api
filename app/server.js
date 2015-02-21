@@ -15,6 +15,11 @@ var server = restify.createServer({
   name: 'frontliners-api'
 });
 
+server.get('/', function create(req, res, next) {
+  res.send("HELLO WORLD!");
+  return next();
+});
+
 server.get('/scoreboard', function create(req, res, next) {
   releaseRetriever.lastRelease(function(err, req, body) {
     res.send(releaseRetriever.processRelease(JSON.parse(body)));
@@ -23,16 +28,5 @@ server.get('/scoreboard', function create(req, res, next) {
   });
   return next();
 });
-
-var params = {screen_name: 'ozoesono', count: 1 }
-
-twit.get('statuses/user_timeline', params, function(error, response) {
-  console.log('twitter function hit');
-  console.log(error);
-  if(!error) {
-    console.log(response);
-  }
-});
-  
 
 server.listen(port);

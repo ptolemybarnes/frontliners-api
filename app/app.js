@@ -1,6 +1,7 @@
 var restify          = require('restify');
 var releaseRetriever = require('./helpers/releaseRetriever')
 var twit             = require('twit');
+var port             = process.env.PORT || 8080;
 
 var releaseRetriever = new releaseRetriever();
 var twit             = new twit({
@@ -34,4 +35,4 @@ twit.get('statuses/user_timeline', params, function(error, response) {
 });
   
 
-server.listen(8080);
+server.listen(port);

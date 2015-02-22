@@ -2,8 +2,11 @@ var restify          = require('restify');
 var ReleaseRetriever = require('./helpers/releaseRetriever');
 var port             = process.env.PORT || 8080;
 var getLastTweet     = require('./helpers/getLastTweet');
-var releaseRetriever = new ReleaseRetriever();
 var _                = require('underscore');
+var TwitWrapper      = require('./helpers/getLastTweet);
+
+var releaseRetriever = new ReleaseRetriever();
+var twitWrapper      = new TwitWrapper();
 
 var server = restify.createServer({
   name: 'frontliners-api'
@@ -25,7 +28,7 @@ server.get('/scoreboard', function create(req, res, next) {
 });
 
 server.get('/tweets/:username', function create(req, res, next) { 
-  getLastTweet(req.params.username, function(tweet) {
+  twitWrapper.getLastTweet(req.params.username, function(tweet) {
     res.send(tweet.text)
   });
 

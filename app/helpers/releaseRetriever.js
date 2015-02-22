@@ -60,7 +60,6 @@ ReleaseRetriever.prototype.getCurrentRelease = function(callback) {
             if(err) { console.log(err) }
             var release = docs[0];
 
-            
             console.log(release);
 
             db.close;

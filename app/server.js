@@ -19,7 +19,8 @@ server.get('/', function create(req, res, next) {
 
 server.get('/scoreboard', function create(req, res, next) {
   releaseRetriever.getCurrentRelease(function(data) {
-    var releaseID = _.keys(data)[0];
+    var keys      = _.keys(data);
+    var releaseID = keys[0];
     res.send(data[releaseID]);
   });
 

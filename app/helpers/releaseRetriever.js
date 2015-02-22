@@ -58,7 +58,7 @@ ReleaseRetriever.prototype.getCurrentRelease = function(callback) {
 
         collection.find().toArray(function(err, docs) {
             if(err) { console.log(err) }
-            var release = docs[0];
+            var release = docs[1];
 
             console.log(release);
 

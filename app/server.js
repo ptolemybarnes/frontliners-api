@@ -22,7 +22,10 @@ server.get('/', function create(req, res, next) {
 
 server.get('/scoreboard', function create(req, res, next) {
   releaseRetriever.lastRelease(function(err, req, body) {
-    res.send(releaseRetriever.processRelease(JSON.parse(body)));
+
+    releaseRetriever.getCurrentRelease(function(data) {
+        res.send(JSON.stringify(data));
+    });
   });
   return next();
 });

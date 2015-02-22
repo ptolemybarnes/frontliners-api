@@ -1,5 +1,7 @@
 var request = require('request');
 var _       = require('underscore');
+var MongoClient = require('mongodb').MongoClient
+    , format = require('util').format;
 
 ReleaseRetriever = function() {
   this.board_id = 8299;
@@ -39,6 +41,27 @@ ReleaseRetriever.prototype.getReleaseID = function(Json) {
   var releaseNums =  _.keys(Json.board.releases)
   return _.max(releaseNums);
 }
+
+ReleaseRetriever.prototype.getCurrentRelease = function(callback) {
+    MongoClient.connect('mongodb://127.0.0.1:27017/pttest', function(err, db) {
+        if(err) throw err;
+
+        var collection = db.collection('users');
+
+        collection.find().toArray(function(err, docs) {
+            if(err) { console.log(err) }
+
+            var release = docs[0];
+
+            var results = release[2330718];
+            console.log(results);
+
+            db.close;
+            callback(results);
+        });
+    });
+}
+
 
 module.exports = ReleaseRetriever;
 

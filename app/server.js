@@ -27,6 +27,8 @@ server.get('/tweets/:username', function create(req, res, next) {
   getLastTweet(req.params.username, function(tweet) {
     res.send(tweet.text)
   });
+
+  return next();
 });
 
 server.listen(port);

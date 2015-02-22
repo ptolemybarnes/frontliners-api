@@ -1,9 +1,8 @@
 var restify          = require('restify');
-var releaseRetriever = require('./helpers/releaseRetriever');
+var ReleaseRetriever = require('./helpers/releaseRetriever');
 var port             = process.env.PORT || 8080;
 var getLastTweet     = require('./helpers/getLastTweet');
-
-
+var releaseRetriever = new ReleaseRetriever();
 
 var server = restify.createServer({
   name: 'frontliners-api'

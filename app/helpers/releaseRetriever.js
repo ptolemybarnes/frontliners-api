@@ -3,6 +3,15 @@ var _       = require('underscore');
 var MongoClient = require('mongodb').MongoClient
     , format = require('util').format;
 
+var twit             = require('twit');
+var twit             = new twit({
+  consumer_key: process.env.FL_TWIT_KEY, 
+  consumer_secret: process.env.FL_TWIT_SECRET,
+  access_token: process.env.FL_TWIT_TOKEN,
+  access_token_secret: process.env.FL_TOKEN_SECRET
+});
+
+
 ReleaseRetriever = function() {
   this.board_id = 8299;
   this.url      = 'https://www.rise.global//api/releases/scores';
@@ -33,7 +42,6 @@ ReleaseRetriever.prototype.processRelease = function(releaseJSON) {
       rank: player.releases[releaseID].rank }
     output[releaseID].push(playerHash);
   }
-
   return output;
 }
 
@@ -53,15 +61,14 @@ ReleaseRetriever.prototype.getCurrentRelease = function(callback) {
 
             var release = docs[0];
 
-            var results = release[2330718];
-            console.log(results);
+            
+            console.log(release);
 
             db.close;
-            callback(results);
+            callback(release);
         });
     });
 }
-
 
 module.exports = ReleaseRetriever;
 

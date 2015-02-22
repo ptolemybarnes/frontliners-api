@@ -24,7 +24,8 @@ server.get('/scoreboard', function create(req, res, next) {
   releaseRetriever.lastRelease(function(err, req, body) {
 
     releaseRetriever.getCurrentRelease(function(data) {
-        res.send(JSON.stringify(data));
+      console.log(data);
+        res.send(data);
     });
   });
   return next();

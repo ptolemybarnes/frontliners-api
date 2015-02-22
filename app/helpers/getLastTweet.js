@@ -19,12 +19,13 @@ TwitWrapper.prototype.processUsernameString = function(string) {
 }
 
 TwitWrapper.prototype.composeTweet = function(usernameArr, message, challenger) {
-  return usernameArr.map(function(username) { return username + " " + challenger
-    + "has challenged you to " + message});
+  return usernameArr.map(function(username) { return username + " @" + challenger
+    + " has challenged you to " + message});
 }
 
 TwitWrapper.prototype.postChallengeTweet = function(usernameString, message, challenger) {
   var usernameArr    = this.processUsernameString(usernameString);
+  usernameArr        = usernameArr.filter(function(name) { return name.length > 1 });
   var tweets         = this.composeTweet(usernameArr, message, challenger);
   console.log(tweets);
   for(var i = 0; i < tweets.length; i ++) {

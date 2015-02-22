@@ -19,10 +19,11 @@ describe('get last tweet', function() {
   });
 
   it('appends a message to an array of twitter usernames', function(done) {
-    var usernameArr = ['@guacamolay','@ozoesono'];
+    var usernameArr = ['@guacamolay', '@ozoesono'];
 
     expect(twitWrapper.composeTweet(usernameArr, "You're a star!")).toEqual(
       ["@guacamolay You're a star!", "@ozoesono You're a star!"]);
     done();
   });
+  console.log("TING");
 });

@@ -6,10 +6,12 @@ var twit             = new twit({
   access_token_secret: process.env.FL_TOKEN_SECRET
 });
 
-var TwitWrapper = function() { }
+var TwitWrapper = function(api) {
+  this.api = api;
+}
 
 TwitWrapper.prototype.getLastTweet = function(username, callback) {
-  twit.get('statuses/user_timeline', {screen_name:  username, count: 1}, function(err, data, response) {
+  this.api.get('statuses/user_timeline', {screen_name:  username, count: 1}, function(err, data, response) {
     callback(data[0]);
   });
 }
@@ -29,7 +31,7 @@ TwitWrapper.prototype.postChallengeTweet = function(usernameString, message, cha
   var tweets         = this.composeTweet(usernameArr, message, challenger);
   console.log(tweets);
   for(var i = 0; i < tweets.length; i ++) {
-    twit.post('statuses/update', { status: tweets[i] }, function(err, data, response) {
+    this.api.post('statuses/update', { status: tweets[i] }, function(err, data, response) {
       if(err) { console.log(err) }
     });
   }

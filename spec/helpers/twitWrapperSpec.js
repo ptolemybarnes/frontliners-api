@@ -1,4 +1,4 @@
-var TwitWrapper = require('../app/helpers/getLastTweet');
+var TwitWrapper = require('../../app/helpers/twitWrapper');
 
 describe('get last tweet', function() {
   var twitWrapper = new TwitWrapper();

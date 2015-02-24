@@ -1,12 +1,12 @@
 var restify          = require('restify');
 var ReleaseRetriever = require('./helpers/releaseRetriever');
 var port             = process.env.PORT || 8080;
-var getLastTweet     = require('./helpers/getLastTweet');
+var TwitWrapper      = require('./helpers/twitWrapper');
 var _                = require('underscore');
 var querystring      = require('querystring');
 
 var releaseRetriever = new ReleaseRetriever();
-var twitWrapper      = new getLastTweet();
+var twitWrapper      = new TwitWrapper();
 
 var server = restify.createServer({
   name: 'frontliners-api'
@@ -45,5 +45,6 @@ server.post('/challenge/:challengeID', function create(req, res, next) {
   return next();
 });
 
-server.listen(port);
+server.listen(port, function() { 
+  console.log("Frontliners API server is listening on port" + port ) });
 

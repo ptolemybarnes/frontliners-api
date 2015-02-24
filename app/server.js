@@ -38,7 +38,7 @@ server.get('/tweets/:username', function create(req, res, next) {
 server.post('/challenge/:challengeID', function create(req, res, next) {
   var challenge = ["to feed a refuge in South Sudan for 1 month. http://donate.oxfam.org.uk/",
                    "to help provide shelter for Syrian refugees. http://donate.unhcr.org/gbr/syria",
-                   "to give a mosquito net to a child exposed to malaria. http://nothingbutnets.net/"][parseInt(req.params.challengeID) + 1];
+                   "to give a mosquito net to a child exposed to malaria. http://nothingbutnets.net/"][parseInt(req.params.challengeID) - 1];
 
   var query   = querystring.parse(req._url.query);
   twitWrapper.postChallengeTweet(query.users, challenge, query.challenger);

@@ -4,16 +4,22 @@ var port             = process.env.PORT || 8080;
 var TwitWrapper      = require('./helpers/twitWrapper');
 var _                = require('underscore');
 var querystring      = require('querystring');
+var twit             = require('twit');
+var twitApi          = new twit({
+  consumer_key: process.env.FL_TWIT_KEY, 
+  consumer_secret: process.env.FL_TWIT_SECRET,
+  access_token: process.env.FL_TWIT_TOKEN,
+  access_token_secret: process.env.FL_TOKEN_SECRET
+});
 
 var releaseRetriever = new ReleaseRetriever();
-var twitWrapper      = new TwitWrapper();
+var twitWrapper      = new TwitWrapper(twitApi);
 
 var server = restify.createServer({
   name: 'frontliners-api'
 });
 
 server.get('/', function create(req, res, next) {
-  res.send("HELLO WORLD!");
   return next();
 });
 
@@ -26,7 +32,7 @@ server.get('/scoreboard', function create(req, res, next) {
 
   return next();
 });
-
+ 
 server.get('/tweets/:username', function create(req, res, next) { 
   twitWrapper.getLastTweet(req.params.username, function(tweet) {
     res.send(tweet.text)

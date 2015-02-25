@@ -1,12 +1,4 @@
-var twit             = require('twit');
-var twit             = new twit({
-  consumer_key: process.env.FL_TWIT_KEY, 
-  consumer_secret: process.env.FL_TWIT_SECRET,
-  access_token: process.env.FL_TWIT_TOKEN,
-  access_token_secret: process.env.FL_TOKEN_SECRET
-});
-
-var TwitWrapper = function(api) {
+ar TwitWrapper = function(api) {
   this.api = api;
 }
 

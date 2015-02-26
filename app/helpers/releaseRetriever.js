@@ -3,16 +3,8 @@ var _       = require('underscore');
 var MongoClient = require('mongodb').MongoClient
     , format = require('util').format;
 
-var twit             = require('twit');
-var twit             = new twit({
-  consumer_key: process.env.FL_TWIT_KEY, 
-  consumer_secret: process.env.FL_TWIT_SECRET,
-  access_token: process.env.FL_TWIT_TOKEN,
-  access_token_secret: process.env.FL_TOKEN_SECRET
-});
 
-
-ReleaseRetriever = function() {
+var ReleaseRetriever = function() {
   this.board_id = 8299;
   this.url      = 'https://www.rise.global//api/releases/scores';
   this.api_key  = process.env.RISE_API_KEY;
@@ -50,6 +42,10 @@ ReleaseRetriever.prototype.getReleaseID = function(Json) {
   return _.max(releaseNums);
 }
 
+ReleaseRetriever.prototype.append = function(userInfo, callback) {
+  return callback(userInfo);
+}
+
 ReleaseRetriever.prototype.getCurrentRelease = function(callback) {
     MongoClient.connect('mongodb://127.0.0.1:27017/pttest', function(err, db) {
         if(err) throw err;
@@ -60,7 +56,7 @@ ReleaseRetriever.prototype.getCurrentRelease = function(callback) {
             if(err) { console.log(err) }
             var release = docs[0];
 
-            console.log(release);
+
 
             db.close;
             callback(release);
@@ -69,7 +65,5 @@ ReleaseRetriever.prototype.getCurrentRelease = function(callback) {
 }
 
 module.exports = ReleaseRetriever;
-
-
 
 

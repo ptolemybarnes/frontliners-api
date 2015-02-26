@@ -13,7 +13,6 @@ TwitWrapper.prototype.getMultipleLastTweets = function(users, callback) {
     var self = this;
 
     (function(i) { 
-      console.log(i);
       var username = "@" + users[i].username;
       self.getLastTweet(username, function(tweet) {
         users[i].tweet = tweet.text;

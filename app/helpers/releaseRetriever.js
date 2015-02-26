@@ -58,8 +58,6 @@ ReleaseRetriever.prototype.getCurrentRelease = function(callback) {
 
 
 
-            console.log(release);
-
             db.close;
             callback(release);
         });

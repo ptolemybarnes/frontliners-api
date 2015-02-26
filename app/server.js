@@ -24,12 +24,15 @@ server.get('/', function create(req, res, next) {
 });
 
 server.get('/scoreboard', function create(req, res, next) {
-  releaseRetriever.getCurrentRelease(function(data) {
-    var keys      = _.keys(data);
-    var releaseID = keys[0];
-    res.send(data[releaseID]);
-  });
+  releaseRetriever.getCurrentRelease(function(users) {
+    var keys      = _.keys(users);
+    var users = users[keys[0]];
 
+
+    twitWrapper.getMultipleLastTweets(users, function(data) {
+     res.send(data); 
+    });
+  });
   return next();
 });
  

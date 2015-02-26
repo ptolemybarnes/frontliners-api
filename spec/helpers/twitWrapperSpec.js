@@ -17,10 +17,13 @@ describe('get last tweet', function() {
   });
 
   it('gets the last tweets of a number of users', function(done) {
-    users = ['@guacamolay', '@ozoesono']
+    var users = [{username: '@guacamolay'}, {username: '@ozoesono'}];
+
     twitWrapper.getMultipleLastTweets(users, function(output) {
-      expect(output).toEqual(['cats cats cats', '
-    
+      expect(output).toEqual([{username: '@guacamolay', tweet: 'Cats cats cats'},
+        {username: '@ozoesono', tweet: 'Cats cats cats'}]);
+      done();
+    });
   });
 
   it('processes a string of usernames into an array of twitter usernames', function(done) {
